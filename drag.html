@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Warmoth Drag-and-Drop Showcase Addons</title>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.24/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://code.jquery.com/ui/1.8.24/themes/blitzer/jquery-ui.css" rel="stylesheet"
+          type="text/css" />
+    <script type="text/javascript">
+
+        $(function () {
+            $("#tabs").tabs();
+            var img;
+
+            $("#btn-pg").click(function() {
+                $('#pickguard').removeAttr('src');
+            });
+
+            $("#btn-br").click(function() {
+                $('#bridge').removeAttr('src');
+            });
+
+            $("#btn-pu").click(function() {
+                $('#puB, #puM, #puN').removeAttr('src');
+            });
+
+            $("#btn-jack").click(function() {
+                $('#jack').removeAttr('src');
+            });
+            $("#btn-neck").click(function() {
+                $('#neck').removeAttr('src');
+            });
+            $("#btn-str").click(function() {
+                $('#string').removeAttr('src');
+            });
+
+            $("#tabs img").draggable({
+                revert: true,
+                revertDuration: 0,
+                zIndex: 100
+//          snap: "#dvDest",
+//          snapMode: "inner"
+            });
+
+            $("#dvDest").droppable({
+                drop: function (event, ui) {
+                    var dropped = ui.draggable;
+                    var droppedOn = this;
+                    img = $(dropped).attr('src');
+                    img = img.replace('/thumbs/', '/');
+
+                    if($(dropped).hasClass('pickguards')){
+                        $("#pickguard").attr('src', img);
+                    }
+                    if($(dropped).hasClass('bridges')){
+                        $("#bridge").attr('src', img);
+                    }
+                    if($(dropped).hasClass('jacks')){
+                        $("#jack").attr('src', img);
+                    }
+                    if($(dropped).hasClass('pickupsBr')){
+                        $("#puB").attr('src', img);
+                    }
+                    if($(dropped).hasClass('pickupsMd')){
+                        $("#puM").attr('src', img);
+                    }
+                    if($(dropped).hasClass('pickupsNk')){
+                        $("#puN").attr('src', img);
+                    }
+                    if($(dropped).hasClass('necks')){
+                        $("#neck").attr('src', img);
+                    }
+                    if($(dropped).hasClass('strings')){
+                        $("#string").attr('src', img);
+                    }
+                    //return to original thumbnail place instead of actually getting dropped
+                    return !event;
+                }
+            });
+        })(jQuery);
+
+    </script>
+    <style type="text/css">
+        body {
+            padding: 50px 100px;
+        }
+
+        .page-wrap{
+            width: 1060px;
+            margin: 0 auto;
+            background-color: f9f9f9;
+        }
+        #tabs-1 img,#tabs-2 img,#tabs-3 img, #tabs-4 img, #tabs-5 img, #tabs-6 img
+        {
+            height: 70px;
+            width: 70px;
+            margin: 10px 5px;
+        }
+        .col {
+            width: 33%;
+            float: left;
+            text-align: center;
+        }
+        .col strong {
+            display: block;
+        }
+        .col img{
+            background-color:#f9f9f9;
+        }
+        #tabs-3{
+            overflow-y:scroll;
+            height:380px;
+        }
+        button#btn-pg, button#btn-br,button#btn-pu,button#btn-jack, button#btn-neck, button#btn-str {
+            display:block;
+            width:100%;
+            /*margin-bottom:20px;*/
+        }
+        #dvDest img {
+            height: 500px;
+            width:340px;
+            text-indent: 100vw;
+        }
+
+
+        #dvDest
+        {
+            display: inline-block;
+            position: relative;
+            float:left;
+            border: 5px solid #ccc;
+            padding: 5px;
+            height: 500px;
+            width: 340px;
+            background: url("/Pascal's Files/DragDropBuilder/images/bodies/stratBody8.jpg"); /* Change body image here by changing the last number (stratBody*[]*)*/
+            background-position: -5px 7px;
+            background-size: contain;
+        }
+        #tabs
+        {
+            display: inline-block;
+            float:left;
+            border: 5px solid #ccc;
+            padding: 5px;
+            height: 500px;
+            width: 350px;
+            background: #9E9E9E;
+        }
+        /*#info*/
+        /*{*/
+            /*display: inline-block;*/
+            /*position: relative;*/
+            /*float:left;*/
+            /*border: 5px solid #ccc;*/
+            /*padding: 5px;*/
+            /*height: 500px;*/
+            /*width: 200px;*/
+            /*text-align: center;*/
+        /*}*/
+        #pickguard {
+            z-index: 3;
+            position: absolute;
+        }
+        #bridge {
+            z-index: 13;
+            position: absolute;
+        }
+        #puM, #puB, #puN {
+            z-index: 7;
+            position: absolute;
+        }
+        #jack {
+            z-index: 5;
+            position: absolute;
+            left: -2px;
+            top: 2px;
+        }
+        #neck{
+            z-index: 9;
+            position: absolute;
+            zoom: 1.1;
+            left: -12px;
+            top: -18px;
+        }
+        #string{
+            z-index: 11;
+            position: absolute;
+            zoom: 1.1;
+            left: -12px;
+            top: -15px;
+        }
+
+        /*jquery css*/
+        .ui-widget-header {
+            border: 1px solid #cdd5da;
+            background: #cdd5da;
+            background-image: none;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!--    <div id="info">-->
+<!--        <p></p>-->
+<!--    </div>-->
+
+    <div id="dvDest">
+        <img id="string" src="" />
+        <img id="neck" src="" />
+        <img id="puN" src="" />
+        <img id="puM" src="" />
+        <img id="puB" src="" />
+        <img id="jack" src="" />
+        <img id="bridge" src="" />
+        <img id="pickguard" src="" />
+    </div>
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Pickguard</a></li>
+            <li><a href="#tabs-2">Bridges</a></li>
+            <li><a href="#tabs-3">Pickups</a></li>
+            <li><a href="#tabs-4">Jacks</a></li>
+            <li><a href="#tabs-5">Necks</a></li>
+            <li><a href="#tabs-6">Strings</a></li>
+        </ul>
+        <div id="tabs-1">
+            <button id="btn-pg">Clear Pickguard</button>
+            <img class="pickguards" alt="" src="/Pascal's Files/DragDropBuilder/images/pickgaurds/thumbs/redPearl.png" />
+            <img class="pickguards" alt="" src="/Pascal's Files/DragDropBuilder/images/pickgaurds/thumbs/blackPearl.png" />
+            <img class="pickguards" alt="" src="/Pascal's Files/DragDropBuilder/images/pickgaurds/thumbs/bluePearl.png" />
+            <img class="pickguards" alt="" src="/Pascal's Files/DragDropBuilder/images/pickgaurds/thumbs/cream.png" />
+            <img class="pickguards" alt="" src="/Pascal's Files/DragDropBuilder/images/pickgaurds/thumbs/black.png" />
+            <img class="pickguards" alt="" src="/Pascal's Files/DragDropBuilder/images/pickgaurds/thumbs/white.png" />
+        </div>
+        <div id="tabs-2">
+            <button id="btn-br" onclick="">Clear Bridge</button>
+            <img class="bridges" alt="" src="/Pascal's Files/DragDropBuilder/images/bridges/thumbs/blackTrem.png" />
+            <img class="bridges" alt="" src="/Pascal's Files/DragDropBuilder/images/bridges/thumbs/goldTrem.png" />
+            <img class="bridges" alt="" src="/Pascal's Files/DragDropBuilder/images/bridges/thumbs/silver.png" />
+            <img class="bridges" alt="" src="/Pascal's Files/DragDropBuilder/images/bridges/thumbs/black.png" />
+        </div>
+        <div id="tabs-3">
+            <button id="btn-pu">Clear all Pickups</button>
+            <div class="col"><strong>Neck</strong>
+                <img class="pickupsNk" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/neck/thumbs/n.png" />
+                <img class="pickupsNk" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/neck/thumbs/n1.png" />
+                <img class="pickupsNk" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/neck/thumbs/n2.png" />
+                <img class="pickupsNk" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/neck/thumbs/n3.png" />
+                <img class="pickupsNk" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/neck/thumbs/n4.png" />
+                <img class="pickupsNk" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/neck/thumbs/n5.png" />
+            </div>
+            <div class="col"><strong>Middle</strong>
+                <img class="pickupsMd" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/middle/thumbs/m.png" />
+                <img class="pickupsMd" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/middle/thumbs/m1.png" />
+                <img class="pickupsMd" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/middle/thumbs/m2.png" />
+            </div>
+            <div class="col"><strong>Bridge</strong>
+                <img class="pickupsBr" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/bridge/thumbs/b.png" />
+                <img class="pickupsBr" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/bridge/thumbs/b1.png" />
+                <img class="pickupsBr" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/bridge/thumbs/b2.png" />
+                <img class="pickupsBr" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/bridge/thumbs/b3.png" />
+                <img class="pickupsBr" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/bridge/thumbs/b4.png" />
+                <img class="pickupsBr" alt="" src="/Pascal's Files/DragDropBuilder/images/pickups/bridge/thumbs/b5.png" />
+            </div>
+        </div>
+        <div id="tabs-4">
+            <button id="btn-jack">Clear Jack</button>
+            <img class="jacks" alt="" src="/Pascal's Files/DragDropBuilder/images/jacks/thumbs/silver.png" />
+            <img class="jacks" alt="" src="/Pascal's Files/DragDropBuilder/images/jacks/thumbs/gold.png" />
+            <img class="jacks" alt="" src="/Pascal's Files/DragDropBuilder/images/jacks/thumbs/black.png" />
+        </div>
+        <div id="tabs-5">
+            <button id="btn-neck">Clear Neck</button>
+            <img class="necks" alt="" src="/Pascal's Files/DragDropBuilder/images/necks/thumbs/neck1.png" />
+            <img class="necks" alt="" src="/Pascal's Files/DragDropBuilder/images/necks/thumbs/neck2.png" />
+            <img class="necks" alt="" src="/Pascal's Files/DragDropBuilder/images/necks/thumbs/neck3.png" />
+            <img class="necks" alt="" src="/Pascal's Files/DragDropBuilder/images/necks/thumbs/neck4.png" />
+        </div>
+        <div id="tabs-6">
+            <button id="btn-str">Clear Strings</button>
+            <div class="col">
+                <img class="strings" alt="" src="/Pascal's Files/DragDropBuilder/images/strings/thumbs/strings.png" />
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
